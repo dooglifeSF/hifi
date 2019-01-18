@@ -22,19 +22,19 @@
 #include <AndroidHelper.h>
 #include <udt/PacketHeaders.h>
 
-#include <OVR_Platform.h>
-#include <OVR_Functions_Voip.h>
+//#include <OVR_Platform.h>
+//#include <OVR_Functions_Voip.h>
 
 void initOculusPlatform(JNIEnv* env, jobject obj) {
     static std::once_flag once;
-    std::call_once(once, [&]{
-        static const char* appID = "2343652845669354";
-        if (ovr_PlatformInitializeAndroid(appID, obj, env) != ovrPlatformInitialize_Success) {
-            __android_log_write(ANDROID_LOG_WARN, "QQQ", "Failed to init platform SDK");
-            return;
-        }
-        ovr_Voip_SetSystemVoipSuppressed(true);
-    });
+ //  std::call_once(once, [&]{
+ //      static const char* appID = "2343652845669354";
+ //      if (ovr_PlatformInitializeAndroid(appID, obj, env) != ovrPlatformInitialize_Success) {
+ //          __android_log_write(ANDROID_LOG_WARN, "QQQ", "Failed to init platform SDK");
+ //          return;
+ //      }
+ //      ovr_Voip_SetSystemVoipSuppressed(true);
+ //  });
 }
 
 extern "C" {

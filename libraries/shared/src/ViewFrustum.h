@@ -31,7 +31,13 @@ const float DEFAULT_CENTER_SPHERE_RADIUS = 3.0f;
 const float DEFAULT_FIELD_OF_VIEW_DEGREES = 45.0f;
 const float DEFAULT_ASPECT_RATIO = 16.0f/9.0f;
 const float DEFAULT_NEAR_CLIP = 0.08f;
+
+#ifdef Q_OS_ANDROID
+const float DEFAULT_FAR_CLIP = 25.0f;
+
+#else
 const float DEFAULT_FAR_CLIP = 16384.0f;
+#endif
 
 class ViewFrustum {
 public:

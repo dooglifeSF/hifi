@@ -66,17 +66,18 @@ void main(void) {
 
     TransformCamera cam = getTransformCamera();
 
-    vec4 color = vec4(evalSkyboxGlobalColor(
-        cam._viewInverse,
-        1.0,
-        occlusion,
-        fragPosition,
-        fragNormal,
-        albedo,
-        fresnel,
-        metallic,
-        roughness),
-        opacity);
+    vec4 color = vec4(albedo,opacity);//
+     //   evalSkyboxGlobalColor(
+     //  cam._viewInverse,
+     //  1.0,
+     //  occlusion,
+     //  fragPosition,
+     //  fragNormal,
+     //  albedo,
+     //  fresnel,
+     //  metallic,
+     //  roughness),
+     //  opacity);
     color.rgb += emissive * isEmissiveEnabled();
 
     _fragColor0 = color;

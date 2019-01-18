@@ -118,7 +118,12 @@ struct VrSurface : public TaskQueue {
                 modeParms.Display = (unsigned long long) vrglContext.display;
                 modeParms.ShareContext = (unsigned long long) vrglContext.context;
                 modeParms.WindowSurface = (unsigned long long) oculusActivityWrapper->_nativeWindow;
+
                 session = vrapi_EnterVrMode(&modeParms);
+
+                vrapi_SetExtraLatencyMode(session, VRAPI_EXTRA_LATENCY_MODE_DYNAMIC);
+                vrapi_SetClockLevels(session, 4,4);
+
                 ovrPosef trackingTransform = vrapi_GetTrackingTransform( session, VRAPI_TRACKING_TRANSFORM_SYSTEM_CENTER_EYE_LEVEL);
                 vrapi_SetTrackingTransform( session, trackingTransform );
                 vrapi_SetPerfThread(session, VRAPI_PERF_THREAD_TYPE_RENDERER, pthread_self());
@@ -168,6 +173,7 @@ struct VrSurface : public TaskQueue {
         frameDesc.DisplayTime = displayTime;
         frameDesc.LayerCount = 1;
         frameDesc.Layers = &layerHeader;
+        frameDesc.SwapInterval=2;
         vrapi_SubmitFrame2(session, &frameDesc);
         ++presentIndex;
         vrglContext.doneCurrent();
