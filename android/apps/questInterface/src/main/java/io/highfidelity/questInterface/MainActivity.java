@@ -13,8 +13,12 @@ package io.highfidelity.questInterface;
 
 import android.os.Bundle;
 import android.view.WindowManager;
-
 import org.qtproject.qt5.android.bindings.QtActivity;
+
+import java.lang.String;
+import java.util.Set;
+import java.util.Iterator;
+import android.util.Log;
 
 import io.highfidelity.utils.HifiUtils;
 
@@ -29,6 +33,25 @@ public class MainActivity extends QtActivity {
         super.isLoading = true;
         super.keepInterfaceRunning = true;
         super.onCreate(savedInstanceState);
+
+        Bundle xtras = getIntent().getExtras();
+
+        if(xtras!= null){
+
+            Set<String> keys= xtras.keySet();
+            Iterator<String> keyIt = ((Set) keys).iterator();
+
+            while(keyIt.hasNext()){
+                String key = keyIt.next();
+                Log.e("QT ARGS","[" + key + "=" + xtras.get(key)+"]");
+            }
+        }
+        else
+        {
+            Log.e("QT ARGS","QT ARGS:: NO EXTRAS");
+        }
+
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         HifiUtils.upackAssets(getAssets(), getCacheDir().getAbsolutePath());
         nativeOnCreate();

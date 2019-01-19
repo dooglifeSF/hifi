@@ -5,6 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
+
+import java.util.Iterator;
+import java.util.Set;
 
 public class PermissionsChecker extends Activity {
     private static final int REQUEST_PERMISSIONS = 20;
@@ -44,7 +48,31 @@ public class PermissionsChecker extends Activity {
     }
 
     private void launchActivityWithPermissions() {
-        startActivity(new Intent(this, MainActivity.class));
+        Bundle xtras = getIntent().getExtras();
+
+        if(xtras!= null){
+
+            Set<String> keys= xtras.keySet();
+            Iterator<String> keyIt = ((Set) keys).iterator();
+
+            while(keyIt.hasNext()){
+                String key = keyIt.next();
+                Log.e("CMD ARGS","[" + key + "=" + xtras.get(key)+"]");
+            }
+        }
+        else
+        {
+            Log.e("CMD ARGS","CMD ARGS:: NO EXTRAS");
+        }
+
+        Intent tt= new Intent(this, MainActivity.class);
+
+
+        if(xtras!=null){
+            tt.putExtras(xtras);
+        }
+
+        startActivity(tt);
         finish();
     }
 
