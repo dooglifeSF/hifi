@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.Iterator;
@@ -20,10 +21,15 @@ public class PermissionsChecker extends Activity {
         Manifest.permission.CAMERA
     };
 
+    private static final String EXTRA_ARGS = "args";
+    private String mArgs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestAppPermissions(REQUIRED_PERMISSIONS,REQUEST_PERMISSIONS);
+
+        mArgs =(getIntent().getStringExtra(EXTRA_ARGS));
     }
 
     public void requestAppPermissions(final String[] requestedPermissions,
@@ -48,12 +54,10 @@ public class PermissionsChecker extends Activity {
     }
 
     private void launchActivityWithPermissions() {
-        Bundle xtras = getIntent().getExtras();
-        Intent mainIntent= new Intent(this, MainActivity.class);
+           Intent mainIntent= new Intent(this, MainActivity.class);
 
-        //passing parameters, in process
-        if(xtras!=null){
-            mainIntent.putExtras(xtras);
+           if(!TextUtils.isEmpty(mArgs)){
+               mainIntent.putExtra(EXTRA_ARGS, mArgs);
         }
 
         startActivity(mainIntent);

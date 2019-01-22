@@ -337,6 +337,11 @@ if (APPLE)
     COMMAND "${CMAKE_COMMAND}" -E copy_directory
       "${PROJECT_SOURCE_DIR}/resources/fonts"
       "${RESOURCES_DEV_DIR}/fonts"
+
+    #copy serverless files to the output for android builds
+    COMMAND "${CMAKE_COMMAND}" -E copy_directory
+      "${PROJECT_SOURCE_DIR}/resources/serverless"
+      "${RESOURCES_DEV_DIR}/serverless"
     # add redirect json to macOS builds.
     COMMAND "${CMAKE_COMMAND}" -E copy_if_different
       "${PROJECT_SOURCE_DIR}/resources/serverless/redirect.json"
