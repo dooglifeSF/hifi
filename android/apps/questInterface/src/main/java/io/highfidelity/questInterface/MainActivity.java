@@ -34,9 +34,6 @@ public class MainActivity extends QtActivity {
         super.keepInterfaceRunning = true;
         super.onCreate(savedInstanceState);
 
-        //get extras to pass to QT
-        Bundle xtras = getIntent().getExtras();
-
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         HifiUtils.upackAssets(getAssets(), getCacheDir().getAbsolutePath());
         nativeOnCreate();

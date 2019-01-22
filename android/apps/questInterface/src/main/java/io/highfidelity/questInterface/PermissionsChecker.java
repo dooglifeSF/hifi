@@ -51,11 +51,12 @@ public class PermissionsChecker extends Activity {
         Bundle xtras = getIntent().getExtras();
         Intent mainIntent= new Intent(this, MainActivity.class);
 
+        //passing parameters, in process
         if(xtras!=null){
             mainIntent.putExtras(xtras);
         }
 
-        startActivity(tt);
+        startActivity(mainIntent);
         finish();
     }
 

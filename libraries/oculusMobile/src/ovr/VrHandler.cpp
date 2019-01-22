@@ -120,7 +120,6 @@ struct VrSurface : public TaskQueue {
 
                 session = vrapi_EnterVrMode(&modeParms);
 
-
                 vrapi_SetExtraLatencyMode(session, VRAPI_EXTRA_LATENCY_MODE_DYNAMIC);
                 vrapi_SetClockLevels(session, 3,4);
 
@@ -173,6 +172,8 @@ struct VrSurface : public TaskQueue {
         frameDesc.DisplayTime = displayTime;
         frameDesc.LayerCount = 1;
         frameDesc.Layers = &layerHeader;
+
+        //swap interval should be set to 1 but for now its a smoother experience
         frameDesc.SwapInterval=2;
         vrapi_SubmitFrame2(session, &frameDesc);
         ++presentIndex;
