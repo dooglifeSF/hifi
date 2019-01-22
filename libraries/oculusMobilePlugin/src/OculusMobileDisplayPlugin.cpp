@@ -62,8 +62,8 @@ bool OculusMobileDisplayPlugin::internalActivate() {
 
     withOvrJava([&](const ovrJava* java){
         _renderTargetSize = glm::uvec2{
-            vrapi_GetSystemPropertyInt(java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH),
-            vrapi_GetSystemPropertyInt(java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT),
+            vrapi_GetSystemPropertyInt(java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_WIDTH)*1.5f,
+            vrapi_GetSystemPropertyInt(java, VRAPI_SYS_PROP_SUGGESTED_EYE_TEXTURE_HEIGHT)*1.5f,
         };
     });
 

@@ -49,27 +49,10 @@ public class PermissionsChecker extends Activity {
 
     private void launchActivityWithPermissions() {
         Bundle xtras = getIntent().getExtras();
-
-        if(xtras!= null){
-
-            Set<String> keys= xtras.keySet();
-            Iterator<String> keyIt = ((Set) keys).iterator();
-
-            while(keyIt.hasNext()){
-                String key = keyIt.next();
-                Log.e("CMD ARGS","[" + key + "=" + xtras.get(key)+"]");
-            }
-        }
-        else
-        {
-            Log.e("CMD ARGS","CMD ARGS:: NO EXTRAS");
-        }
-
-        Intent tt= new Intent(this, MainActivity.class);
-
+        Intent mainIntent= new Intent(this, MainActivity.class);
 
         if(xtras!=null){
-            tt.putExtras(xtras);
+            mainIntent.putExtras(xtras);
         }
 
         startActivity(tt);

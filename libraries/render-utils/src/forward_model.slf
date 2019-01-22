@@ -66,6 +66,7 @@ void main(void) {
 
     TransformCamera cam = getTransformCamera();
 
+    //we'll replace the shader with a simpler version for quest
     vec4 color = vec4(albedo,opacity);//
      //   evalSkyboxGlobalColor(
      //  cam._viewInverse,

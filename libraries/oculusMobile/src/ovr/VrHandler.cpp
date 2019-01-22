@@ -46,7 +46,6 @@ struct VrSurface : public TaskQueue {
             return;
         }
 
-
         QAndroidJniEnvironment env;
         ovrJava java{ QAndroidJniEnvironment::javaVM(), env, mainActivity.object() };
         EGLContext currentContext = eglGetCurrentContext();
@@ -121,8 +120,9 @@ struct VrSurface : public TaskQueue {
 
                 session = vrapi_EnterVrMode(&modeParms);
 
+
                 vrapi_SetExtraLatencyMode(session, VRAPI_EXTRA_LATENCY_MODE_DYNAMIC);
-                vrapi_SetClockLevels(session, 4,4);
+                vrapi_SetClockLevels(session, 3,4);
 
                 ovrPosef trackingTransform = vrapi_GetTrackingTransform( session, VRAPI_TRACKING_TRANSFORM_SYSTEM_CENTER_EYE_LEVEL);
                 vrapi_SetTrackingTransform( session, trackingTransform );
