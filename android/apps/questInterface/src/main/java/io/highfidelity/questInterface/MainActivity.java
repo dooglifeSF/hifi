@@ -36,9 +36,7 @@ public class MainActivity extends QtActivity {
         super.keepInterfaceRunning = true;
 
         Intent intent = getIntent();
-
         if(intent.hasExtra(EXTRA_ARGS)){
-
             String args = intent.getStringExtra((EXTRA_ARGS));
             intent.putExtra("applicationArguments", args);
         }
