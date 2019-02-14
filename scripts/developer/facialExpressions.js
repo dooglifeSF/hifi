@@ -3,6 +3,7 @@
 // A script to set different emotions using blend shapes
 //
 // Author: Elisa Lupin-Jimenez
+// (extended for HMD controllers - Doug Wilcox 2/13/2019)
 // Copyright High Fidelity 2018
 //
 // Licensed under the Apache 2.0 License
@@ -17,7 +18,7 @@
     var TABLET_BUTTON_NAME = "EMOTIONS";
     // TODO: ADD HTML LANDING PAGE
 
-    var TRANSITION_TIME_SECONDS = 0.25;
+    var TRANSITION_TIME_SECONDS = 0.18;
 
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     var icon = "https://hifi-content.s3.amazonaws.com/elisalj/emoji_scripts/icons/emoji-i.svg";
@@ -47,225 +48,332 @@
 
     tabletButton.clicked.connect(toggle);
 
+
+
+
     var DEFAULT = {
-        "EyeOpen_L": 0.00,
-        "EyeOpen_R": 0.00,
-        "EyeBlink_L": 0.00,
-        "EyeBlink_R": 0.00,
-        "EyeSquint_L": 0.00,
-        "EyeSquint_R": 0.00,
-        "BrowsD_L": 0.00,
-        "BrowsD_R": 0.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 0.00,
-        "JawOpen": 0.00,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 0.00,
-        "MouthFrown_R": 0.00,
-        "MouthSmile_L": 0.00,
-        "MouthSmile_R": 0.00,
-        "MouthDimple_L": 0.00,
-        "MouthDimple_R": 0.00,
-        "LipsUpperClose": 0.00,
-        "LipsLowerClose": 0.00,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.00,
-        "Sneer": 0.00,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 0.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": -0.0 ,
+        "MouthRight": -0.0 ,
+        "ChinLowerRaise": 0.0 ,
+        "BrowsU_C": 0.0 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 0.0 ,
+        "JawOpen": 0.0 ,
+        "BrowsU_R": 0.0 ,
+        "Sneer": 0.0 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 0.0 ,
+        "MouthDimple_L": 0.0 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 0.0 ,
+        "MouthSmile_R": 0.0 ,
+        "MouthDimple_R": 0.0 ,
+        "MouthLeft": 0.0 ,
+        "LipsLowerClose": -0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.0 ,
+        "MouthFrown_L": 0.0 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": -0.0 ,
+        "JawLeft": 0.0 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": -0.0 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.0 ,
+        "EyeSquint_R": 0.0 ,
+        };
+
+
+
 
     var SMILE = {
-        "EyeOpen_L": 0.00,
-        "EyeOpen_R": 0.00,
-        "EyeBlink_L": 0.30,
-        "EyeBlink_R": 0.30,
-        "EyeSquint_L": 0.90,
-        "EyeSquint_R": 0.90,
-        "BrowsD_L": 1.00,
-        "BrowsD_R": 1.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 0.00,
-        "JawOpen": 0.00,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 0.00,
-        "MouthFrown_R": 0.00,
-        "MouthSmile_L": 1.00,
-        "MouthSmile_R": 1.00,
-        "MouthDimple_L": 1.00,
-        "MouthDimple_R": 1.00,
-        "LipsUpperClose": 0.40,
-        "LipsLowerClose": 0.30,
-        "LipsLowerOpen": 0.25,
-        "ChinUpperRaise": 0.35,
-        "Sneer": 0.00,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 1.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": -0.0 ,
+        "MouthRight": 0.0 ,
+        "ChinLowerRaise": 1.1061 ,
+        "BrowsU_C": 0.3208 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 0.3208 ,
+        "JawOpen": 0.0 ,
+        "BrowsU_R": 0.717 ,
+        "Sneer": 0.0 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 1.0 ,
+        "MouthDimple_L": 1.0 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 1.0 ,
+        "MouthSmile_R": 1.0 ,
+        "MouthDimple_R": 1.0 ,
+        "MouthLeft": 0.285 ,
+        "LipsLowerClose": -0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.0 ,
+        "MouthFrown_L": 0.0 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": -0.0 ,
+        "JawLeft": 0.1056 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": -0.0 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.0 ,
+        "EyeSquint_R": 0.0 ,
+        };
+
 
     var LAUGH = {
-        "EyeOpen_L": 0.00,
-        "EyeOpen_R": 0.00,
-        "EyeBlink_L": 0.45,
-        "EyeBlink_R": 0.45,
-        "EyeSquint_L": 0.75,
-        "EyeSquint_R": 0.75,
-        "BrowsD_L": 0.00,
-        "BrowsD_R": 0.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 0.50,
-        "JawOpen": 0.50,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 0.00,
-        "MouthFrown_R": 0.00,
-        "MouthSmile_L": 1.00,
-        "MouthSmile_R": 1.00,
-        "MouthDimple_L": 1.00,
-        "MouthDimple_R": 1.00,
-        "LipsUpperClose": 0.00,
-        "LipsLowerClose": 0.00,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.30,
-        "Sneer": 1.00,
-        "Puff": 0.30
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 1.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": -0.0 ,
+        "MouthRight": 0.051 ,
+        "ChinLowerRaise": 0.0 ,
+        "BrowsU_C": 0.0 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 0.0 ,
+        "JawOpen": 0.3374 ,
+        "BrowsU_R": 0.0 ,
+        "Sneer": 0.2935 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 1.0 ,
+        "MouthDimple_L": 1.0 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 1.0 ,
+        "MouthSmile_R": 1.0 ,
+        "MouthDimple_R": 1.0 ,
+        "MouthLeft": 0.0 ,
+        "LipsLowerClose": -0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.4 ,
+        "MouthFrown_L": 0.0 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": 0.2164 ,
+        "JawLeft": 0.2452 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": 0.0199 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.0 ,
+        "EyeSquint_R": 0.4 ,
+        };
 
     var FLIRT = {
-        "EyeOpen_L": 0.00,
-        "EyeOpen_R": 0.00,
-        "EyeBlink_L": 0.50,
-        "EyeBlink_R": 0.50,
-        "EyeSquint_L": 0.25,
-        "EyeSquint_R": 0.25,
-        "BrowsD_L": 0.00,
-        "BrowsD_R": 1.00,
-        "BrowsU_L": 0.55,
-        "BrowsU_C": 0.00,
-        "JawOpen": 0.00,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 0.00,
-        "MouthFrown_R": 0.00,
-        "MouthSmile_L": 0.50,
-        "MouthSmile_R": 0.00,
-        "MouthDimple_L": 1.00,
-        "MouthDimple_R": 1.00,
-        "LipsUpperClose": 0.00,
-        "LipsLowerClose": 0.00,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.00,
-        "Sneer": 0.00,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 0.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": -0.0 ,
+        "MouthRight": 0.8509 ,
+        "ChinLowerRaise": 1.1061 ,
+        "BrowsU_C": 0.0 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 0.0 ,
+        "JawOpen": 0.0 ,
+        "BrowsU_R": 1.0 ,
+        "Sneer": 0.0 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 0.0 ,
+        "MouthDimple_L": 1.0 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 1.0 ,
+        "MouthSmile_R": 1.0 ,
+        "MouthDimple_R": 1.0 ,
+        "MouthLeft": 0.0 ,
+        "LipsLowerClose": -0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.0 ,
+        "MouthFrown_L": 0.0 ,
+        "EyeBlink_L": 0.1 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": -0.0 ,
+        "JawLeft": 0.1056 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": -0.0 ,
+        "EyeBlink_R": 0.1 ,
+        "MouthFrown_R": 0.0 ,
+        "EyeSquint_R": 0.0 ,
+        };
 
     var SAD = {
-        "EyeOpen_L": 0.00,
-        "EyeOpen_R": 0.00,
-        "EyeBlink_L": 0.30,
-        "EyeBlink_R": 0.30,
-        "EyeSquint_L": 0.30,
-        "EyeSquint_R": 0.30,
-        "BrowsD_L": 0.00,
-        "BrowsD_R": 0.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 0.50,
-        "JawOpen": 0.00,
-        "JawFwd": 0.80,
-        "MouthFrown_L": 0.80,
-        "MouthFrown_R": 0.80,
-        "MouthSmile_L": 0.00,
-        "MouthSmile_R": 0.00,
-        "MouthDimple_L": 0.00,
-        "MouthDimple_R": 0.00,
-        "LipsUpperClose": 0.00,
-        "LipsLowerClose": 0.50,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.00,
-        "Sneer": 0.00,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 1.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": 0.1566 ,
+        "MouthRight": 0.0 ,
+        "ChinLowerRaise": 1.2544 ,
+        "BrowsU_C": 0.0 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 0.0 ,
+        "JawOpen": 0.0 ,
+        "BrowsU_R": 0.0 ,
+        "Sneer": 0.0 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 1.0 ,
+        "MouthDimple_L": 0.0 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 0.0 ,
+        "MouthSmile_R": 0.0 ,
+        "MouthDimple_R": 0.0 ,
+        "MouthLeft": 0.0002 ,
+        "LipsLowerClose": -0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.0 ,
+        "MouthFrown_L": 0.4793 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": -0.0 ,
+        "JawLeft": 0.512 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": -0.0 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.3925 ,
+        "EyeSquint_R": 0.0 ,
+        };
 
     var ANGRY = {
-        "EyeOpen_L": 1.00,
-        "EyeOpen_R": 1.00,
-        "EyeBlink_L": 0.00,
-        "EyeBlink_R": 0.00,
-        "EyeSquint_L": 1.00,
-        "EyeSquint_R": 1.00,
-        "BrowsD_L": 1.00,
-        "BrowsD_R": 1.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 0.00,
-        "JawOpen": 0.00,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 0.50,
-        "MouthFrown_R": 0.50,
-        "MouthSmile_L": 0.00,
-        "MouthSmile_R": 0.00,
-        "MouthDimple_L": 0.00,
-        "MouthDimple_R": 0.00,
-        "LipsUpperClose": 0.50,
-        "LipsLowerClose": 0.50,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.00,
-        "Sneer": 0.50,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 0.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": -0.0 ,
+        "MouthRight": 0.0 ,
+        "ChinLowerRaise": 1.6646 ,
+        "BrowsU_C": 0.0 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 0.0 ,
+        "JawOpen": 0.0 ,
+        "BrowsU_R": 0.0 ,
+        "Sneer": 0.4939 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 0.0 ,
+        "MouthDimple_L": 0.0 ,
+        "LipsLowerOpen": 0.3972 ,
+        "MouthSmile_L": 0.0 ,
+        "MouthSmile_R": 0.0 ,
+        "MouthDimple_R": 0.0 ,
+        "MouthLeft": 0.3645 ,
+        "LipsLowerClose": 0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 1.0 ,
+        "MouthFrown_L": 0.0 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": 0.594 ,
+        "JawLeft": 0.1334 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": 0.594 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.0 ,
+        "EyeSquint_R": 1.0 ,
+        };
 
     var FEAR = {
-        "EyeOpen_L": 1.00,
-        "EyeOpen_R": 1.00,
-        "EyeBlink_L": 0.00,
-        "EyeBlink_R": 0.00,
-        "EyeSquint_L": 0.00,
-        "EyeSquint_R": 0.00,
-        "BrowsD_L": 0.00,
-        "BrowsD_R": 0.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 1.00,
-        "JawOpen": 0.15,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 0.30,
-        "MouthFrown_R": 0.30,
-        "MouthSmile_L": 0.00,
-        "MouthSmile_R": 0.00,
-        "MouthDimple_L": 0.00,
-        "MouthDimple_R": 0.00,
-        "LipsUpperClose": 0.00,
-        "LipsLowerClose": 0.00,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.00,
-        "Sneer": 0.00,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 1.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": 0.2352 ,
+        "MouthRight": 0.0899 ,
+        "ChinLowerRaise": 0.2351 ,
+        "BrowsU_C": 0.0 ,
+        "ChinUpperRaise": 0.1656 ,
+        "BrowsU_L": 0.0 ,
+        "JawOpen": 0.0 ,
+        "BrowsU_R": 0.0 ,
+        "Sneer": 0.3348 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 1.0 ,
+        "MouthDimple_L": 0.0 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 0.0 ,
+        "MouthSmile_R": 0.0 ,
+        "MouthDimple_R": 0.0 ,
+        "MouthLeft": 0.0 ,
+        "LipsLowerClose": 0.9936 ,
+        "LipsUpperUp": 0.1656 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.0 ,
+        "MouthFrown_L": 0.2119 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": 0.3014 ,
+        "JawLeft": 0.1802 ,
+        "LipsUpperClose": 0.7245 ,
+        "BrowsD_L": 0.3014 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.1372 ,
+        "EyeSquint_R": 0.0 ,
+        };
+
+
+
 
     var DISGUST = {
-        "EyeOpen_L": 0.00,
-        "EyeOpen_R": 0.00,
-        "EyeBlink_L": 0.25,
-        "EyeBlink_R": 0.25,
-        "EyeSquint_L": 1.00,
-        "EyeSquint_R": 1.00,
-        "BrowsD_L": 1.00,
-        "BrowsD_R": 1.00,
-        "BrowsU_L": 0.00,
-        "BrowsU_C": 0.00,
-        "JawOpen": 0.00,
-        "JawFwd": 0.00,
-        "MouthFrown_L": 1.00,
-        "MouthFrown_R": 1.00,
-        "MouthSmile_L": 0.00,
-        "MouthSmile_R": 0.00,
-        "MouthDimple_L": 0.00,
-        "MouthDimple_R": 0.00,
-        "LipsUpperClose": 0.00,
-        "LipsLowerClose": 0.75,
-        "LipsLowerOpen": 0.00,
-        "ChinUpperRaise": 0.75,
-        "Sneer": 1.00,
-        "Puff": 0.00
-    };
+        "LipsLowerDown": 0.0 ,
+        "EyeOpen_L": 1.0 ,
+        "LipsFunnel": 0.0 ,
+        "LipsPucker": -0.0 ,
+        "MouthRight": 0.0 ,
+        "ChinLowerRaise": 0.0 ,
+        "BrowsU_C": 1.0 ,
+        "ChinUpperRaise": 0.0 ,
+        "BrowsU_L": 1.0 ,
+        "JawOpen": 0.5706 ,
+        "BrowsU_R": 1.0 ,
+        "Sneer": 0.0 ,
+        "JawRight": 0.0 ,
+        "LipsUpperOpen": 0.0 ,
+        "EyeOpen_R": 1.0 ,
+        "MouthDimple_L": 0.5489 ,
+        "LipsLowerOpen": 0.0 ,
+        "MouthSmile_L": 0.5489 ,
+        "MouthSmile_R": 0.4785 ,
+        "MouthDimple_R": 0.4785 ,
+        "MouthLeft": 0.5002 ,
+        "LipsLowerClose": -0.0 ,
+        "LipsUpperUp": 0.0 ,
+        "JawFwd": 0.0 ,
+        "EyeSquint_L": 0.0 ,
+        "MouthFrown_L": 0.0 ,
+        "EyeBlink_L": 0.0 ,
+        "Puff": 0.0 ,
+        "BrowsD_R": -0.0 ,
+        "JawLeft": 0.0 ,
+        "LipsUpperClose": -0.0 ,
+        "BrowsD_L": -0.0 ,
+        "EyeBlink_R": 0.0 ,
+        "MouthFrown_R": 0.0 ,
+        "EyeSquint_R": 0.0 ,
+        };
+
+
+    // function clamp(val, min, max) {
+    //     return Math.min(Math.max(val, min), max);
+    // }
 
 
     function mixValue(valueA, valueB, percentage) {
+        valueA = typeof valueA === "number" ? valueA : 0;
+        valueB = typeof valueB === "number" ? valueB : 0;
+
         return valueA + ((valueB - valueA) * percentage);
+
     }
 
     var lastEmotionUsed = DEFAULT;
@@ -274,10 +382,30 @@
     var changingEmotionPercentage = 0.0;
 
     Script.update.connect(function(deltaTime) {
+
+    //CLEANUP if all HMD controls are off
+        // var allInputs = clamp(
+        // //grips
+        // Controller.getValue(Controller.Standard.LT) +
+        // Controller.getValue(Controller.Standard.LeftGrip)+
+        // Controller.getValue(Controller.Standard.LT)+
+        // Controller.getValue(Controller.Standard.LT)+
+        // //finger/thumb touches
+        // Controller.getValue(Controller.Standard.LeftIndexPoint)+
+        // Controller.getValue(Controller.Standard.RightIndexPoint)+
+        // Controller.getValue(Controller.Standard.LeftThumbUp)+
+        // Controller.getValue(Controller.Standard.RightThumbUp)
+        // , 0, 1);
+
+
+
+
         if (!isChangingEmotion) {
             return;
         }
+
         changingEmotionPercentage += deltaTime / TRANSITION_TIME_SECONDS;
+
         if (changingEmotionPercentage >= 1.0) {
             changingEmotionPercentage = 1.0;
             isChangingEmotion = false;
@@ -285,10 +413,21 @@
                 MyAvatar.hasScriptedBlendshapes = false;
             }
         }
+
+        //DOUG: this doesn't support different sized emotion dictionaries.  Bug.
         for (var blendshape in emotion) {
+            var mixValueSum = mixValue(lastEmotionUsed[blendshape], emotion[blendshape], changingEmotionPercentage);
+
+            // console.log("blendshape:" + blendshape, mixValueSum);
+
             MyAvatar.setBlendshape(blendshape,
-                mixValue(lastEmotionUsed[blendshape], emotion[blendshape], changingEmotionPercentage));
+                mixValueSum);
         }
+
+        // if (allInputs === 0){
+        //     setEmotion(DEFAULT);
+        // }
+
     });
 
     function setEmotion(currentEmotion) {
@@ -352,6 +491,53 @@
     controllerMapping.from(Controller.Hardware.Keyboard.N).to(function(value) {
         if (value !== 0) {
             setEmotion(DEFAULT);
+        }
+    });
+
+
+
+    //CONTROLLER MAPS
+    controllerMapping.from(Controller.Standard.LeftGrip).to(function(value) {
+        if (value !== 0) {
+            setEmotion(DISGUST);
+            // console.log("DISGUST ON");
+        }
+    });
+
+    controllerMapping.from(Controller.Standard.RightGrip).to(function(value) {
+        if (value !== 0) {
+            setEmotion(LAUGH);
+        }
+    });
+
+    controllerMapping.from(Controller.Standard.LSTouch).to(function(value) {
+        if (value !== 0) {
+            setEmotion(FEAR);
+        }
+    });
+
+    controllerMapping.from(Controller.Standard.RSTouch).to(function(value) {
+        if (value !== 0) {
+            setEmotion(FLIRT);
+        }
+    });
+
+    controllerMapping.from(Controller.Standard.LTClick).to(function(value) {
+        if (value !== 0) {
+            setEmotion(ANGRY);
+        }
+    });
+
+    controllerMapping.from(Controller.Standard.RTClick).to(function(value) {
+        if (value !== 0) {
+            setEmotion(SMILE);
+        }
+    });
+
+    controllerMapping.from(Controller.Standard.A).to(function(value) {
+        if (value !== 0) {
+            setEmotion(DEFAULT);
+            // console.log("DEFAULT ON");
         }
     });
 

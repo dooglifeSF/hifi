@@ -16,8 +16,8 @@
 
 (function() { // BEGIN LOCAL_SCOPE
 
-var lastLeftTrigger = 0;
-var lastRightTrigger = 0;
+var lastLeftGrip = 0;
+var lastRightGrip = 0;
 var leftHandOverlayAlpha = 0;
 var rightHandOverlayAlpha = 0;
 
@@ -34,10 +34,12 @@ var rightThumbRaisedOverride = 0;
 
 var HIFI_POINT_INDEX_MESSAGE_CHANNEL = "Hifi-Point-Index";
 
-var isLeftIndexPointing = false;
-var isRightIndexPointing = false;
-var isLeftThumbRaised = false;
-var isRightThumbRaised = false;
+var isLeftIndexFree = false;
+var isRightIndexFree = false;
+var isLeftThumbFree = false;
+var isRightThumbFree = false;
+
+var isDefaultGestureSet = false;
 
 function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
@@ -52,47 +54,76 @@ function lerp(a, b, alpha) {
 }
 
 function init() {
+
     Script.update.connect(update);
     animStateHandlerID = MyAvatar.addAnimationStateHandler(
         animStateHandler,
         [
-            "leftHandOverlayAlpha", "leftHandGraspAlpha",
-            "rightHandOverlayAlpha", "rightHandGraspAlpha",
-            "isLeftHandGrasp", "isLeftIndexPoint", "isLeftThumbRaise", "isLeftIndexPointAndThumbRaise",
-            "isRightHandGrasp", "isRightIndexPoint", "isRightThumbRaise", "isRightIndexPointAndThumbRaise"
+            "leftHandOverlayAlpha", "leftHandGripAlpha",
+            "rightHandOverlayAlpha", "rightHandGripAlpha",
+            "isLeftIndexTouchThumbTouch", "isLeftIndexFreeThumbTouch", "isLeftIndexTouchThumbFree", "isLeftIndexFreeThumbFree",
+            "isRightIndexTouchThumbTouch", "isRightIndexFreeThumbTouch", "isRightIndexTouchThumbFree", "isRightIndexFreeThumbFree",
+
+            "isLeftIndexTouchThumbTouchEmote", "isLeftIndexFreeThumbTouchEmote", "isLeftIndexTouchThumbFreeEmote", "isLeftIndexFreeThumbFreeEmote",
+            "isRightIndexTouchThumbTouchEmote", "isRightIndexFreeThumbTouchEmote", "isRightIndexTouchThumbFreeEmote", "isRightIndexFreeThumbFreeEmote"
         ]
     );
     Messages.subscribe(HIFI_POINT_INDEX_MESSAGE_CHANNEL);
     Messages.messageReceived.connect(handleMessages);
 }
 
+
 function animStateHandler(props) {
-    return {
+    if (isDefaultGestureSet)
+    {
+        return {
         leftHandOverlayAlpha: leftHandOverlayAlpha,
-        leftHandGraspAlpha: lastLeftTrigger,
+        leftHandGripAlpha: lastLeftGrip,
         rightHandOverlayAlpha: rightHandOverlayAlpha,
-        rightHandGraspAlpha: lastRightTrigger,
+        rightHandGripAlpha: lastRightGrip,
 
-        isLeftHandGrasp: !isLeftIndexPointing && !isLeftThumbRaised,
-        isLeftIndexPoint: isLeftIndexPointing && !isLeftThumbRaised,
-        isLeftThumbRaise: !isLeftIndexPointing && isLeftThumbRaised,
-        isLeftIndexPointAndThumbRaise: isLeftIndexPointing && isLeftThumbRaised,
 
-        isRightHandGrasp: !isRightIndexPointing && !isRightThumbRaised,
-        isRightIndexPoint: isRightIndexPointing && !isRightThumbRaised,
-        isRightThumbRaise: !isRightIndexPointing && isRightThumbRaised,
-        isRightIndexPointAndThumbRaise: isRightIndexPointing && isRightThumbRaised
-    };
+        isLeftIndexTouchThumbTouch: !isLeftIndexFree && !isLeftThumbFree, //
+        isLeftIndexFreeThumbTouch: isLeftIndexFree && !isLeftThumbFree,
+        isLeftIndexTouchThumbFree: !isLeftIndexFree && isLeftThumbFree,
+        isLeftIndexFreeThumbFree: isLeftIndexFree && isLeftThumbFree,
+
+        isRightIndexTouchThumbTouch: !isRightIndexFree && !isRightThumbFree, //
+        isRightIndexFreeThumbTouch: isRightIndexFree && !isRightThumbFree,
+        isRightIndexTouchThumbFree: !isRightIndexFree && isRightThumbFree,
+        isRightIndexFreeThumbFree: isRightIndexFree && isRightThumbFree
+        };
+    }
+    else //customGestureSet
+    {
+        return {
+        leftHandOverlayAlpha: leftHandOverlayAlpha,
+        leftHandGripAlpha: lastLeftGrip,
+        rightHandOverlayAlpha: rightHandOverlayAlpha,
+        rightHandGripAlpha: lastRightGrip,
+
+        isLeftIndexTouchThumbTouchEmote: !isLeftIndexFree && !isLeftThumbFree, //
+        isLeftIndexFreeThumbTouchEmote: isLeftIndexFree && !isLeftThumbFree,
+        isLeftIndexTouchThumbFreeEmote: !isLeftIndexFree && isLeftThumbFree,
+        isLeftIndexFreeThumbFreeEmote: isLeftIndexFree && isLeftThumbFree,
+
+        isRightIndexTouchThumbTouchEmote: !isRightIndexFree && !isRightThumbFree, //
+        isRightIndexFreeThumbTouchEmote: isRightIndexFree && !isRightThumbFree,
+        isRightIndexTouchThumbFreeEmote: !isRightIndexFree && isRightThumbFree,
+        isRightIndexFreeThumbFreeEmote: isRightIndexFree && isRightThumbFree
+        };
+    }
+
 }
 
 function update(dt) {
-    var leftTrigger = clamp(Controller.getValue(Controller.Standard.LT) + Controller.getValue(Controller.Standard.LeftGrip), 0, 1);
-    var rightTrigger = clamp(Controller.getValue(Controller.Standard.RT) + Controller.getValue(Controller.Standard.RightGrip), 0, 1);
+    var leftGrip = clamp(Controller.getValue(Controller.Standard.LT) + Controller.getValue(Controller.Standard.LeftGrip), 0, 1);
+    var rightGrip = clamp(Controller.getValue(Controller.Standard.RT) + Controller.getValue(Controller.Standard.RightGrip), 0, 1);
 
     //  Average last few trigger values together for a bit of smoothing
     var tau = clamp(dt / TRIGGER_SMOOTH_TIMESCALE, 0, 1);
-    lastLeftTrigger = lerp(leftTrigger, lastLeftTrigger, tau);
-    lastRightTrigger = lerp(rightTrigger, lastRightTrigger, tau);
+    lastLeftGrip = lerp(leftGrip, lastLeftGrip, tau);
+    lastRightGrip = lerp(rightGrip, lastRightGrip, tau);
 
     // ramp on/off left hand overlay
     var leftHandPose = Controller.getPoseValue(Controller.Standard.LeftHand);
@@ -111,10 +142,10 @@ function update(dt) {
     }
 
     // Pointing index fingers and raising thumbs
-    isLeftIndexPointing = (leftIndexPointingOverride > 0) || (leftHandPose.valid && Controller.getValue(Controller.Standard.LeftIndexPoint) === 1);
-    isRightIndexPointing = (rightIndexPointingOverride > 0) || (rightHandPose.valid && Controller.getValue(Controller.Standard.RightIndexPoint) === 1);
-    isLeftThumbRaised = (leftThumbRaisedOverride > 0) || (leftHandPose.valid && Controller.getValue(Controller.Standard.LeftThumbUp) === 1);
-    isRightThumbRaised = (rightThumbRaisedOverride > 0) || (rightHandPose.valid && Controller.getValue(Controller.Standard.RightThumbUp) === 1);
+    isLeftIndexFree = (leftIndexPointingOverride > 0) || (leftHandPose.valid && Controller.getValue(Controller.Standard.LeftIndexPoint) === 1);
+    isRightIndexFree = (rightIndexPointingOverride > 0) || (rightHandPose.valid && Controller.getValue(Controller.Standard.RightIndexPoint) === 1);
+    isLeftThumbFree = (leftThumbRaisedOverride > 0) || (leftHandPose.valid && Controller.getValue(Controller.Standard.LeftThumbUp) === 1);
+    isRightThumbFree = (rightThumbRaisedOverride > 0) || (rightHandPose.valid && Controller.getValue(Controller.Standard.RightThumbUp) === 1);
 }
 
 function handleMessages(channel, message, sender) {

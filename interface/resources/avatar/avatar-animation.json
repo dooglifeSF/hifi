@@ -197,61 +197,138 @@
                                                                         "id": "rightHandStateMachine",
                                                                         "type": "stateMachine",
                                                                         "data": {
-                                                                            "currentState": "rightHandGrasp",
+                                                                            "currentState": "RightIndexFreeThumbFree",
                                                                             "states": [
                                                                                 {
-                                                                                    "id": "rightHandGrasp",
+                                                                                    "id": "RightIndexTouchThumbTouch",
                                                                                     "interpTarget": 3,
                                                                                     "interpDuration": 3,
                                                                                     "transitions": [
-                                                                                        { "var": "isRightIndexPoint", "state": "rightIndexPoint" },
-                                                                                        { "var": "isRightThumbRaise", "state": "rightThumbRaise" },
-                                                                                        { "var": "isRightIndexPointAndThumbRaise", "state": "rightIndexPointAndThumbRaise" }
+                                                                                        { "var": "isRightIndexFreeThumbTouch", "state": "RightIndexFreeThumbTouch" },
+                                                                                        { "var": "isRightIndexTouchThumbFree", "state": "RightIndexTouchThumbFree" },
+                                                                                        { "var": "isRightIndexFreeThumbFree", "state": "RightIndexFreeThumbFree" },
+
+                                                                                        { "var": "isRightIndexFreeThumbTouchEmote", "state": "RightIndexFreeThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexTouchThumbFreeEmote", "state": "RightIndexTouchThumbFreeEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
                                                                                     ]
                                                                                 },
                                                                                 {
-                                                                                    "id": "rightIndexPoint",
+                                                                                    "id": "RightIndexFreeThumbTouch",
                                                                                     "interpTarget": 15,
                                                                                     "interpDuration": 3,
                                                                                     "transitions": [
-                                                                                        { "var": "isRightHandGrasp", "state": "rightHandGrasp" },
-                                                                                        { "var": "isRightThumbRaise", "state": "rightThumbRaise" },
-                                                                                        { "var": "isRightIndexPointAndThumbRaise", "state": "rightIndexPointAndThumbRaise" }
+                                                                                        { "var": "isRightIndexTouchThumbTouch", "state": "RightIndexTouchThumbTouch" },
+                                                                                        { "var": "isRightIndexTouchThumbFree", "state": "RightIndexTouchThumbFree" },
+                                                                                        { "var": "isRightIndexFreeThumbFree", "state": "RightIndexFreeThumbFree" },
+
+                                                                                        { "var": "isRightIndexTouchThumbTouchEmote", "state": "RightIndexTouchThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexTouchThumbFreeEmote", "state": "RightIndexTouchThumbFreeEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
                                                                                     ]
                                                                                 },
                                                                                 {
-                                                                                    "id": "rightThumbRaise",
+                                                                                    "id": "RightIndexTouchThumbFree",
                                                                                     "interpTarget": 15,
                                                                                     "interpDuration": 3,
                                                                                     "transitions": [
-                                                                                        { "var": "isRightHandGrasp", "state": "rightHandGrasp" },
-                                                                                        { "var": "isRightIndexPoint", "state": "rightIndexPoint" },
-                                                                                        { "var": "isRightIndexPointAndThumbRaise", "state": "rightIndexPointAndThumbRaise" }
+                                                                                        { "var": "isRightIndexTouchThumbTouch", "state": "RightIndexTouchThumbTouch" },
+                                                                                        { "var": "isRightIndexFreeThumbTouch", "state": "RightIndexFreeThumbTouch" },
+                                                                                        { "var": "isRightIndexFreeThumbFree", "state": "RightIndexFreeThumbFree" },
+
+                                                                                        { "var": "isRightIndexTouchThumbTouchEmote", "state": "RightIndexTouchThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbTouchEmote", "state": "RightIndexFreeThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
                                                                                     ]
                                                                                 },
                                                                                 {
-                                                                                    "id": "rightIndexPointAndThumbRaise",
+                                                                                    "id": "RightIndexFreeThumbFree",
                                                                                     "interpTarget": 15,
                                                                                     "interpDuration": 3,
                                                                                     "transitions": [
-                                                                                        { "var": "isRightHandGrasp", "state": "rightHandGrasp" },
-                                                                                        { "var": "isRightIndexPoint", "state": "rightIndexPoint" },
-                                                                                        { "var": "isRightThumbRaise", "state": "rightThumbRaise" }
+                                                                                        { "var": "isRightIndexTouchThumbTouch", "state": "RightIndexTouchThumbTouch" },
+                                                                                        { "var": "isRightIndexFreeThumbTouch", "state": "RightIndexFreeThumbTouch" },
+                                                                                        { "var": "isRightIndexTouchThumbFree", "state": "RightIndexTouchThumbFree" },
+
+                                                                                        { "var": "isRightIndexTouchThumbTouchEmote", "state": "RightIndexTouchThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbTouchEmote", "state": "RightIndexFreeThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
+                                                                                    ]
+                                                                                },
+
+                                                                                {
+                                                                                    "id": "RightIndexTouchThumbTouchEmote",
+                                                                                    "interpTarget": 3,
+                                                                                    "interpDuration": 3,
+                                                                                    "transitions": [
+                                                                                        { "var": "isRightIndexFreeThumbTouch", "state": "RightIndexFreeThumbTouch" },
+                                                                                        { "var": "isRightIndexTouchThumbFree", "state": "RightIndexTouchThumbFree" },
+                                                                                        { "var": "isRightIndexFreeThumbFree", "state": "RightIndexFreeThumbFree" },
+
+                                                                                        { "var": "isRightIndexFreeThumbTouchEmote", "state": "RightIndexFreeThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexTouchThumbFreeEmote", "state": "RightIndexTouchThumbFreeEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "id": "RightIndexFreeThumbTouchEmote",
+                                                                                    "interpTarget": 15,
+                                                                                    "interpDuration": 3,
+                                                                                    "transitions": [
+                                                                                        { "var": "isRightIndexTouchThumbTouch", "state": "RightIndexTouchThumbTouch" },
+                                                                                        { "var": "isRightIndexTouchThumbFree", "state": "RightIndexTouchThumbFree" },
+                                                                                        { "var": "isRightIndexFreeThumbFree", "state": "RightIndexFreeThumbFree" },
+
+                                                                                        { "var": "isRightIndexTouchThumbTouchEmote", "state": "RightIndexTouchThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexTouchThumbFreeEmote", "state": "RightIndexTouchThumbFreeEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "id": "RightIndexTouchThumbFreeEmote",
+                                                                                    "interpTarget": 15,
+                                                                                    "interpDuration": 3,
+                                                                                    "transitions": [
+                                                                                        { "var": "isRightIndexTouchThumbTouch", "state": "RightIndexTouchThumbTouch" },
+                                                                                        { "var": "isRightIndexFreeThumbTouch", "state": "RightIndexFreeThumbTouch" },
+                                                                                        { "var": "isRightIndexFreeThumbFree", "state": "RightIndexFreeThumbFree" },
+
+                                                                                        { "var": "isRightIndexTouchThumbTouchEmote", "state": "RightIndexTouchThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbTouchEmote", "state": "RightIndexFreeThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbFreeEmote", "state": "RightIndexFreeThumbFreeEmote" }
+                                                                                    ]
+                                                                                },
+                                                                                {
+                                                                                    "id": "RightIndexFreeThumbFreeEmote",
+                                                                                    "interpTarget": 15,
+                                                                                    "interpDuration": 3,
+                                                                                    "transitions": [
+                                                                                        { "var": "isRightIndexTouchThumbTouch", "state": "RightIndexTouchThumbTouch" },
+                                                                                        { "var": "isRightIndexFreeThumbTouch", "state": "RightIndexFreeThumbTouch" },
+                                                                                        { "var": "isRightIndexTouchThumbFree", "state": "RightIndexTouchThumbFree" },
+
+                                                                                        { "var": "isRightIndexTouchThumbTouchEmote", "state": "RightIndexTouchThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexFreeThumbTouchEmote", "state": "RightIndexFreeThumbTouchEmote" },
+                                                                                        { "var": "isRightIndexTouchThumbFreeEmote", "state": "RightIndexTouchThumbFreeEmote" }
                                                                                     ]
                                                                                 }
                                                                             ]
                                                                         },
                                                                         "children": [
+
+
+
+
                                                                             {
-                                                                                "id": "rightHandGrasp",
+                                                                                "id": "RightIndexTouchThumbTouch",
                                                                                 "type": "blendLinear",
                                                                                 "data": {
                                                                                     "alpha": 0.0,
-                                                                                    "alphaVar": "rightHandGraspAlpha"
+                                                                                    "alphaVar": "rightHandGripAlpha"
                                                                                 },
                                                                                 "children": [
                                                                                     {
-                                                                                        "id": "rightHandGraspOpen",
+                                                                                        "id": "RightIndexTouchThumbTouchOpen",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/hydra_pose_open_right.fbx",
@@ -263,7 +340,7 @@
                                                                                         "children": []
                                                                                     },
                                                                                     {
-                                                                                        "id": "rightHandGraspClosed",
+                                                                                        "id": "RightIndexTouchThumbTouchClosed",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/hydra_pose_closed_right.fbx",
@@ -277,15 +354,15 @@
                                                                                 ]
                                                                             },
                                                                             {
-                                                                                "id": "rightIndexPoint",
+                                                                                "id": "RightIndexFreeThumbTouch",
                                                                                 "type": "blendLinear",
                                                                                 "data":  {
                                                                                     "alpha": 0.0,
-                                                                                    "alphaVar": "rightHandGraspAlpha"
+                                                                                    "alphaVar": "rightHandGripAlpha"
                                                                                 },
                                                                                 "children": [
                                                                                     {
-                                                                                        "id": "rightIndexPointOpen",
+                                                                                        "id": "RightIndexFreeThumbTouchOpen",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/touch_point_open_right.fbx",
@@ -297,7 +374,7 @@
                                                                                         "children": []
                                                                                     },
                                                                                     {
-                                                                                        "id": "rightIndexPointClosed",
+                                                                                        "id": "RightIndexFreeThumbTouchClosed",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/touch_point_closed_right.fbx",
@@ -311,15 +388,15 @@
                                                                                 ]
                                                                             },
                                                                             {
-                                                                                "id": "rightThumbRaise",
+                                                                                "id": "RightIndexTouchThumbFree",
                                                                                 "type": "blendLinear",
                                                                                 "data":  {
                                                                                     "alpha": 0.0,
-                                                                                    "alphaVar": "rightHandGraspAlpha"
+                                                                                    "alphaVar": "rightHandGripAlpha"
                                                                                 },
                                                                                 "children": [
                                                                                     {
-                                                                                        "id": "rightThumbRaiseOpen",
+                                                                                        "id": "RightIndexTouchThumbFreeOpen",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/touch_thumb_open_right.fbx",
@@ -331,7 +408,7 @@
                                                                                         "children": []
                                                                                     },
                                                                                     {
-                                                                                        "id": "rightThumbRaiseClosed",
+                                                                                        "id": "RightIndexTouchThumbFreeClosed",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/touch_thumb_closed_right.fbx",
@@ -345,15 +422,15 @@
                                                                                 ]
                                                                             },
                                                                             {
-                                                                                "id": "rightIndexPointAndThumbRaise",
+                                                                                "id": "RightIndexFreeThumbFree",
                                                                                 "type": "blendLinear",
                                                                                 "data":  {
                                                                                     "alpha": 0.0,
-                                                                                    "alphaVar": "rightHandGraspAlpha"
+                                                                                    "alphaVar": "rightHandGripAlpha"
                                                                                 },
                                                                                 "children": [
                                                                                     {
-                                                                                        "id": "rightIndexPointAndThumbRaiseOpen",
+                                                                                        "id": "RightIndexFreeThumbFreeOpen",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/touch_thumb_point_open_right.fbx",
@@ -365,7 +442,7 @@
                                                                                         "children": []
                                                                                     },
                                                                                     {
-                                                                                        "id": "rightIndexPointAndThumbRaiseClosed",
+                                                                                        "id": "RightIndexFreeThumbFreeClosed",
                                                                                         "type": "clip",
                                                                                         "data": {
                                                                                             "url": "qrc:///avatar/animations/touch_thumb_point_closed_right.fbx",
@@ -377,7 +454,149 @@
                                                                                         "children": []
                                                                                     }
                                                                                 ]
+                                                                            },
+
+
+                                                                            {
+                                                                                "id": "RightIndexTouchThumbTouchEmote",
+                                                                                "type": "blendLinear",
+                                                                                "data": {
+                                                                                    "alpha": 0.0,
+                                                                                    "alphaVar": "rightHandGripAlpha"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "id": "RightIndexTouchThumbTouchEmoteOpen",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "maya/hands/fbx/emote_okay_right.fbx",
+                                                                                            "startFrame": 0.0,
+                                                                                            "endFrame": 100.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "RightIndexTouchThumbTouchEmoteClosed",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "maya/hands/fbx/emote_horns_right.fbx",
+                                                                                            "startFrame": 0.0,
+                                                                                            "endFrame": 100.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "id": "RightIndexFreeThumbTouchEmote",
+                                                                                "type": "blendLinear",
+                                                                                "data":  {
+                                                                                    "alpha": 0.0,
+                                                                                    "alphaVar": "rightHandGripAlpha"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "id": "RightIndexFreeThumbTouchEmoteOpen",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "maya/hands/fbx/emote_peace_right.fbx",
+                                                                                            "startFrame": 0.0,
+                                                                                            "endFrame": 100.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "RightIndexFreeThumbTouchEmoteClosed",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "qrc:///avatar/animations/touch_point_closed_right.fbx",
+                                                                                            "startFrame": 15.0,
+                                                                                            "endFrame": 15.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "id": "RightIndexTouchThumbFreeEmote",
+                                                                                "type": "blendLinear",
+                                                                                "data":  {
+                                                                                    "alpha": 0.0,
+                                                                                    "alphaVar": "rightHandGripAlpha"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "id": "RightIndexTouchThumbFreeEmoteOpen",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "maya/hands/fbx/emote_heart_right.fbx",
+                                                                                            "startFrame": 0.0,
+                                                                                            "endFrame": 100.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "RightIndexTouchThumbFreeEmoteClosed",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "qrc:///avatar/animations/touch_thumb_closed_right.fbx",
+                                                                                            "startFrame": 15.0,
+                                                                                            "endFrame": 15.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "id": "RightIndexFreeThumbFreeEmote",
+                                                                                "type": "blendLinear",
+                                                                                "data":  {
+                                                                                    "alpha": 0.0,
+                                                                                    "alphaVar": "rightHandGripAlpha"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "id": "RightIndexFreeThumbFreeEmoteOpen",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "maya/hands/fbx/emote_open_right.fbx",
+                                                                                            "startFrame": 0.0,
+                                                                                            "endFrame": 100.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "RightIndexFreeThumbFreeEmoteClosed",
+                                                                                        "type": "clip",
+                                                                                        "data": {
+                                                                                            "url": "maya/hands/fbx/emote_shaka_right.fbx",
+                                                                                            "startFrame": 1.0,
+                                                                                            "endFrame": 100.0,
+                                                                                            "timeScale": 1.0,
+                                                                                            "loopFlag": true
+                                                                                        },
+                                                                                        "children": []
+                                                                                    }
+                                                                                ]
                                                                             }
+
+
+
+
                                                                         ]
                                                                     },
                                                                     {
@@ -393,61 +612,142 @@
                                                                                 "id": "leftHandStateMachine",
                                                                                 "type": "stateMachine",
                                                                                 "data": {
-                                                                                    "currentState": "leftHandGrasp",
+                                                                                    "currentState": "LeftIndexFreeThumbFree",
                                                                                     "states": [
+
+
                                                                                         {
-                                                                                            "id": "leftHandGrasp",
+                                                                                            "id": "LeftIndexTouchThumbTouch",
                                                                                             "interpTarget": 3,
                                                                                             "interpDuration": 3,
                                                                                             "transitions": [
-                                                                                                { "var": "isLeftIndexPoint", "state": "leftIndexPoint" },
-                                                                                                { "var": "isLeftThumbRaise", "state": "leftThumbRaise" },
-                                                                                                { "var": "isLeftIndexPointAndThumbRaise", "state": "leftIndexPointAndThumbRaise" }
+                                                                                                { "var": "isLeftIndexFreeThumbTouch", "state": "LeftIndexFreeThumbTouch" },
+                                                                                                { "var": "isLeftIndexTouchThumbFree", "state": "LeftIndexTouchThumbFree" },
+                                                                                                { "var": "isLeftIndexFreeThumbFree", "state": "LeftIndexFreeThumbFree" },
+
+                                                                                                { "var": "isLeftIndexFreeThumbTouchEmote", "state": "LeftIndexFreeThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexTouchThumbFreeEmote", "state": "LeftIndexTouchThumbFreeEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbFreeEmote", "state": "LeftIndexFreeThumbFreeEmote" }
                                                                                             ]
                                                                                         },
                                                                                         {
-                                                                                            "id": "leftIndexPoint",
+                                                                                            "id": "LeftIndexFreeThumbTouch",
                                                                                             "interpTarget": 15,
                                                                                             "interpDuration": 3,
                                                                                             "transitions": [
-                                                                                                { "var": "isLeftHandGrasp", "state": "leftHandGrasp" },
-                                                                                                { "var": "isLeftThumbRaise", "state": "leftThumbRaise" },
-                                                                                                { "var": "isLeftIndexPointAndThumbRaise", "state": "leftIndexPointAndThumbRaise" }
+                                                                                                { "var": "isLeftIndexTouchThumbTouch", "state": "LeftIndexTouchThumbTouch" },
+                                                                                                { "var": "isLeftIndexTouchThumbFree", "state": "LeftIndexTouchThumbFree" },
+                                                                                                { "var": "isLeftIndexFreeThumbFree", "state": "LeftIndexFreeThumbFree" },
+
+                                                                                                { "var": "isLeftIndexTouchThumbTouchEmote", "state": "LeftIndexTouchThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexTouchThumbFreeEmote", "state": "LeftIndexTouchThumbFreeEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbFreeEmote", "state": "LeftIndexFreeThumbFreeEmote" }
                                                                                             ]
                                                                                         },
                                                                                         {
-                                                                                            "id": "leftThumbRaise",
+                                                                                            "id": "LeftIndexTouchThumbFree",
                                                                                             "interpTarget": 15,
                                                                                             "interpDuration": 3,
                                                                                             "transitions": [
-                                                                                                { "var": "isLeftHandGrasp", "state": "leftHandGrasp" },
-                                                                                                { "var": "isLeftIndexPoint", "state": "leftIndexPoint" },
-                                                                                                { "var": "isLeftIndexPointAndThumbRaise", "state": "leftIndexPointAndThumbRaise" }
+                                                                                                { "var": "isLeftIndexTouchThumbTouch", "state": "LeftIndexTouchThumbTouch" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouch", "state": "LeftIndexFreeThumbTouch" },
+                                                                                                { "var": "isLeftIndexFreeThumbFree", "state": "LeftIndexFreeThumbFree" },
+
+                                                                                                { "var": "isLeftIndexTouchThumbTouchEmote", "state": "LeftIndexTouchThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouchEmote", "state": "LeftIndexFreeThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbFreeEmote", "state": "LeftIndexFreeThumbFreeEmote" }
                                                                                             ]
                                                                                         },
                                                                                         {
-                                                                                            "id": "leftIndexPointAndThumbRaise",
+                                                                                            "id": "LeftIndexFreeThumbFree",
                                                                                             "interpTarget": 15,
                                                                                             "interpDuration": 3,
                                                                                             "transitions": [
-                                                                                                { "var": "isLeftHandGrasp", "state": "leftHandGrasp" },
-                                                                                                { "var": "isLeftIndexPoint", "state": "leftIndexPoint" },
-                                                                                                { "var": "isLeftThumbRaise", "state": "leftThumbRaise" }
+                                                                                                { "var": "isLeftIndexTouchThumbTouch", "state": "LeftIndexTouchThumbTouch" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouch", "state": "LeftIndexFreeThumbTouch" },
+                                                                                                { "var": "isLeftIndexTouchThumbFree", "state": "LeftIndexTouchThumbFree" },
+
+                                                                                                { "var": "isLeftIndexTouchThumbTouchEmote", "state": "LeftIndexTouchThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouchEmote", "state": "LeftIndexFreeThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexTouchThumbFreeEmote", "state": "LeftIndexTouchThumbFreeEmote" }
+                                                                                            ]
+                                                                                        },
+
+
+
+                                                                                        {
+                                                                                            "id": "LeftIndexTouchThumbTouchEmote",
+                                                                                            "interpTarget": 3,
+                                                                                            "interpDuration": 3,
+                                                                                            "transitions": [
+                                                                                                { "var": "isLeftIndexFreeThumbTouch", "state": "LeftIndexFreeThumbTouch" },
+                                                                                                { "var": "isLeftIndexTouchThumbFree", "state": "LeftIndexTouchThumbFree" },
+                                                                                                { "var": "isLeftIndexFreeThumbFree", "state": "LeftIndexFreeThumbFree" },
+
+                                                                                                { "var": "isLeftIndexFreeThumbTouchEmote", "state": "LeftIndexFreeThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexTouchThumbFreeEmote", "state": "LeftIndexTouchThumbFreeEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbFreeEmote", "state": "LeftIndexFreeThumbFreeEmote" }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "id": "LeftIndexFreeThumbTouchEmote",
+                                                                                            "interpTarget": 15,
+                                                                                            "interpDuration": 3,
+                                                                                            "transitions": [
+                                                                                                { "var": "isLeftIndexTouchThumbTouch", "state": "LeftIndexTouchThumbTouch" },
+                                                                                                { "var": "isLeftIndexTouchThumbFree", "state": "LeftIndexTouchThumbFree" },
+                                                                                                { "var": "isLeftIndexFreeThumbFree", "state": "LeftIndexFreeThumbFree" },
+
+                                                                                                { "var": "isLeftIndexTouchThumbTouchEmote", "state": "LeftIndexTouchThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexTouchThumbFreeEmote", "state": "LeftIndexTouchThumbFreeEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbFreeEmote", "state": "LeftIndexFreeThumbFreeEmote" }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "id": "LeftIndexTouchThumbFreeEmote",
+                                                                                            "interpTarget": 15,
+                                                                                            "interpDuration": 3,
+                                                                                            "transitions": [
+                                                                                                { "var": "isLeftIndexTouchThumbTouch", "state": "LeftIndexTouchThumbTouch" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouch", "state": "LeftIndexFreeThumbTouch" },
+                                                                                                { "var": "isLeftIndexFreeThumbFree", "state": "LeftIndexFreeThumbFree" },
+
+                                                                                                { "var": "isLeftIndexTouchThumbTouchEmote", "state": "LeftIndexTouchThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouchEmote", "state": "LeftIndexFreeThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbFreeEmote", "state": "LeftIndexFreeThumbFreeEmote" }
+                                                                                            ]
+                                                                                        },
+                                                                                        {
+                                                                                            "id": "LeftIndexFreeThumbFreeEmote",
+                                                                                            "interpTarget": 15,
+                                                                                            "interpDuration": 3,
+                                                                                            "transitions": [
+                                                                                                { "var": "isLeftIndexTouchThumbTouch", "state": "LeftIndexTouchThumbTouch" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouch", "state": "LeftIndexFreeThumbTouch" },
+                                                                                                { "var": "isLeftIndexTouchThumbFree", "state": "LeftIndexTouchThumbFree" },
+
+                                                                                                { "var": "isLeftIndexTouchThumbTouchEmote", "state": "LeftIndexTouchThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexFreeThumbTouchEmote", "state": "LeftIndexFreeThumbTouchEmote" },
+                                                                                                { "var": "isLeftIndexTouchThumbFreeEmote", "state": "LeftIndexTouchThumbFreeEmote" }
                                                                                             ]
                                                                                         }
+
+
                                                                                     ]
                                                                                 },
                                                                                 "children": [
+
+
                                                                                     {
-                                                                                        "id": "leftHandGrasp",
+                                                                                        "id": "LeftIndexTouchThumbTouch",
                                                                                         "type": "blendLinear",
                                                                                         "data": {
                                                                                             "alpha": 0.0,
-                                                                                            "alphaVar": "leftHandGraspAlpha"
+                                                                                            "alphaVar": "leftHandGripAlpha"
                                                                                         },
                                                                                         "children": [
                                                                                             {
-                                                                                                "id": "leftHandGraspOpen",
+                                                                                                "id": "LeftIndexTouchThumbTouchOpen",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/hydra_pose_open_left.fbx",
@@ -459,7 +759,7 @@
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "id": "leftHandGraspClosed",
+                                                                                                "id": "LeftIndexTouchThumbTouchClosed",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/hydra_pose_closed_left.fbx",
@@ -473,15 +773,15 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "id": "leftIndexPoint",
+                                                                                        "id": "LeftIndexFreeThumbTouch",
                                                                                         "type": "blendLinear",
                                                                                         "data":  {
                                                                                             "alpha": 0.0,
-                                                                                            "alphaVar": "leftHandGraspAlpha"
+                                                                                            "alphaVar": "leftHandGripAlpha"
                                                                                         },
                                                                                         "children": [
                                                                                             {
-                                                                                                "id": "leftIndexPointOpen",
+                                                                                                "id": "LeftIndexFreeThumbTouchOpen",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/touch_point_open_left.fbx",
@@ -493,7 +793,7 @@
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "id": "leftIndexPointClosed",
+                                                                                                "id": "LeftIndexFreeThumbTouchClosed",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/touch_point_closed_left.fbx",
@@ -507,15 +807,15 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "id": "leftThumbRaise",
+                                                                                        "id": "LeftIndexTouchThumbFree",
                                                                                         "type": "blendLinear",
                                                                                         "data":  {
                                                                                             "alpha": 0.0,
-                                                                                            "alphaVar": "leftHandGraspAlpha"
+                                                                                            "alphaVar": "leftHandGripAlpha"
                                                                                         },
                                                                                         "children": [
                                                                                             {
-                                                                                                "id": "leftThumbRaiseOpen",
+                                                                                                "id": "LeftIndexTouchThumbFreeOpen",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/touch_thumb_open_left.fbx",
@@ -527,7 +827,7 @@
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "id": "leftThumbRaiseClosed",
+                                                                                                "id": "LeftIndexTouchThumbFreeClosed",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/touch_thumb_closed_left.fbx",
@@ -541,15 +841,15 @@
                                                                                         ]
                                                                                     },
                                                                                     {
-                                                                                        "id": "leftIndexPointAndThumbRaise",
+                                                                                        "id": "LeftIndexFreeThumbFree",
                                                                                         "type": "blendLinear",
                                                                                         "data":  {
                                                                                             "alpha": 0.0,
-                                                                                            "alphaVar": "leftHandGraspAlpha"
+                                                                                            "alphaVar": "leftHandGripAlpha"
                                                                                         },
                                                                                         "children": [
                                                                                             {
-                                                                                                "id": "leftIndexPointAndThumbRaiseOpen",
+                                                                                                "id": "LeftIndexFreeThumbFreeOpen",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/touch_thumb_point_open_left.fbx",
@@ -561,7 +861,7 @@
                                                                                                 "children": []
                                                                                             },
                                                                                             {
-                                                                                                "id": "leftIndexPointAndThumbRaiseClosed",
+                                                                                                "id": "LeftIndexFreeThumbFreeClosed",
                                                                                                 "type": "clip",
                                                                                                 "data": {
                                                                                                     "url": "qrc:///avatar/animations/touch_thumb_point_closed_left.fbx",
@@ -573,7 +873,146 @@
                                                                                                 "children": []
                                                                                             }
                                                                                         ]
+                                                                                    },
+
+                                                                                    {
+                                                                                        "id": "LeftIndexTouchThumbTouchEmote",
+                                                                                        "type": "blendLinear",
+                                                                                        "data": {
+                                                                                            "alpha": 0.0,
+                                                                                            "alphaVar": "leftHandGripAlpha"
+                                                                                        },
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "id": "LeftIndexTouchThumbTouchEmoteOpen",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "maya/hands/fbx/emote_okay_left.fbx",
+                                                                                                    "startFrame": 0.0,
+                                                                                                    "endFrame": 100.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            },
+                                                                                            {
+                                                                                                "id": "LeftIndexTouchThumbTouchEmoteClosed",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "maya/hands/fbx/emote_horns_left.fbx",
+                                                                                                    "startFrame": 0.0,
+                                                                                                    "endFrame": 100.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "LeftIndexFreeThumbTouchEmote",
+                                                                                        "type": "blendLinear",
+                                                                                        "data":  {
+                                                                                            "alpha": 0.0,
+                                                                                            "alphaVar": "leftHandGripAlpha"
+                                                                                        },
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "id": "LeftIndexFreeThumbTouchEmoteOpen",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "maya/hands/fbx/emote_peace_left.fbx",
+                                                                                                    "startFrame": 0.0,
+                                                                                                    "endFrame": 100.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            },
+                                                                                            {
+                                                                                                "id": "LeftIndexFreeThumbTouchEmoteClosed",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "qrc:///avatar/animations/touch_point_closed_left.fbx",
+                                                                                                    "startFrame": 15.0,
+                                                                                                    "endFrame": 15.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "LeftIndexTouchThumbFreeEmote",
+                                                                                        "type": "blendLinear",
+                                                                                        "data":  {
+                                                                                            "alpha": 0.0,
+                                                                                            "alphaVar": "leftHandGripAlpha"
+                                                                                        },
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "id": "LeftIndexTouchThumbFreeEmoteOpen",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "maya/hands/fbx/emote_heart_left.fbx",
+                                                                                                    "startFrame": 0.0,
+                                                                                                    "endFrame": 100.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            },
+                                                                                            {
+                                                                                                "id": "LeftIndexTouchThumbFreeEmoteClosed",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "qrc:///avatar/animations/touch_thumb_closed_left.fbx",
+                                                                                                    "startFrame": 15,
+                                                                                                    "endFrame": 15,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            }
+                                                                                        ]
+                                                                                    },
+                                                                                    {
+                                                                                        "id": "LeftIndexFreeThumbFreeEmote",
+                                                                                        "type": "blendLinear",
+                                                                                        "data":  {
+                                                                                            "alpha": 0.0,
+                                                                                            "alphaVar": "leftHandGripAlpha"
+                                                                                        },
+                                                                                        "children": [
+                                                                                            {
+                                                                                                "id": "LeftIndexFreeThumbFreeEmoteOpen",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "maya/hands/fbx/emote_open_left.fbx",
+                                                                                                    "startFrame": 0.0,
+                                                                                                    "endFrame": 100.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            },
+                                                                                            {
+                                                                                                "id": "LeftIndexFreeThumbFreeEmoteClosed",
+                                                                                                "type": "clip",
+                                                                                                "data": {
+                                                                                                    "url": "maya/hands/fbx/emote_shaka_left.fbx",
+                                                                                                    "startFrame": 0.0,
+                                                                                                    "endFrame": 100.0,
+                                                                                                    "timeScale": 1.0,
+                                                                                                    "loopFlag": true
+                                                                                                },
+                                                                                                "children": []
+                                                                                            }
+                                                                                        ]
                                                                                     }
+
+
                                                                                 ]
                                                                             },
                                                                             {
@@ -649,9 +1088,8 @@
                                                                                         },
                                                                                         {
                                                                                             "id": "WALKFWD",
-                                                                                            "interpTarget": 35,
-                                                                                            "interpDuration": 10,
-                                                                                            "interpType": "snapshotPrev",
+                                                                                            "interpTarget": 8,
+                                                                                            "interpDuration": 8,
                                                                                             "transitions": [
                                                                                                 { "var": "isNotMoving", "state": "idleSettle" },
                                                                                                 { "var": "isMovingBackward", "state": "WALKBWD" },
@@ -831,8 +1269,8 @@
                                                                                         },
                                                                                         {
                                                                                             "id": "TAKEOFFRUN",
-                                                                                            "interpTarget": 2,
-                                                                                            "interpDuration": 2,
+                                                                                            "interpTarget": 3,
+                                                                                            "interpDuration": 3,
                                                                                             "transitions": [
                                                                                                 { "var": "isNotTakeoff", "state": "INAIRRUN" }
                                                                                             ]
@@ -848,11 +1286,11 @@
                                                                                         },
                                                                                         {
                                                                                             "id": "INAIRRUN",
-                                                                                            "interpTarget": 3,
-                                                                                            "interpDuration": 3,
+                                                                                            "interpTarget": 2,
+                                                                                            "interpDuration": 2,
                                                                                             "interpType": "snapshotPrev",
                                                                                             "transitions": [
-                                                                                                { "var": "isNotInAir", "state": "WALKFWD" }
+                                                                                                { "var": "isNotInAir", "state": "LANDRUN" }
                                                                                             ]
                                                                                         },
                                                                                         {
@@ -895,7 +1333,7 @@
                                                                                                 { "var": "isFlying", "state": "fly" },
                                                                                                 { "var": "isTakeoffStand", "state": "takeoffStand" },
                                                                                                 { "var": "isTakeoffRun", "state": "TAKEOFFRUN" },
-                                                                                                { "var": "landRunOnDone", "state": "WALKFWD" }
+                                                                                                { "var": "LANDRUNOnDone", "state": "WALKFWD" }
                                                                                             ]
                                                                                         }
                                                                                     ]
@@ -930,7 +1368,7 @@
                                                                                                 "id": "idleStand",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/idle.fbx",
+                                                                                                    "url": "fbx/idle.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 300.0,
                                                                                                     "timeScale": 1.0,
@@ -942,7 +1380,7 @@
                                                                                                 "id": "idleTalk",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/talk.fbx",
+                                                                    					            "url": "fbx/talk.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 800.0,
                                                                                                     "timeScale": 1.0,
@@ -979,7 +1417,7 @@
                                                                                                 "id": "walkFwdNormal_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_fwd.fbx",
+                                                                    					            "url": "fbx/walk_fwd.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 30.0,
                                                                                                     "timeScale": 1.0,
@@ -991,7 +1429,7 @@
                                                                                                 "id": "walkFwdFast_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_fwd_fast.fbx",
+                                                                   				                    "url": "fbx/walk_fwd_fast.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 25.0,
                                                                                                     "timeScale": 1.0,
@@ -1003,7 +1441,7 @@
                                                                                                 "id": "walkFwdJog_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jog_fwd.fbx",
+                                                                  				                     "url": "fbx/jog_fwd.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 25.0,
                                                                                                     "timeScale": 1.0,
@@ -1041,7 +1479,7 @@
                                                                                         "id": "idleSettle",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/settle_to_idle.fbx",
+                                                            				                "url": "fbx/settle_to_idle.fbx",
                                                                                             "startFrame": 1.0,
                                                                                             "endFrame": 59.0,
                                                                                             "timeScale": 1.0,
@@ -1064,7 +1502,7 @@
                                                                                                 "id": "walkBwdShort_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_short_bwd.fbx",
+                                                                                                    "url": "fbx/walk_short_bwd.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 38.0,
                                                                                                     "timeScale": 1.0,
@@ -1076,7 +1514,7 @@
                                                                                                 "id": "walkBwdFast_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_bwd_fast.fbx",
+                                                                 				                    "url": "fbx/walk_bwd_fast.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 27.0,
                                                                                                     "timeScale": 1.0,
@@ -1088,7 +1526,7 @@
                                                                                                 "id": "jogBwd_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jog_bwd.fbx",
+                                                                 				                    "url": "fbx/jog_bwd.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 24.0,
                                                                                                     "timeScale": 1.0,
@@ -1100,7 +1538,7 @@
                                                                                                 "id": "runBwd_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/run_bwd.fbx",
+                                                                 				                    "url": "fbx/run_bwd.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 16.0,
                                                                                                     "timeScale": 1.0,
@@ -1114,7 +1552,7 @@
                                                                                         "id": "turnLeft",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/turn_left.fbx",
+                                                                                            "url": "fbx/turn_left.fbx",
                                                                                             "startFrame": 0.0,
                                                                                             "endFrame": 32.0,
                                                                                             "timeScale": 1.0,
@@ -1126,7 +1564,7 @@
                                                                                         "id": "turnRight",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/turn_left.fbx",
+                                                           					                "url": "fbx/turn_left.fbx",
                                                                                             "startFrame": 0.0,
                                                                                             "endFrame": 32.0,
                                                                                             "timeScale": 1.0,
@@ -1150,7 +1588,7 @@
                                                                                                 "id": "strafeLeftShortStep_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/side_step_short_left.fbx",
+                                                                   				                    "url": "fbx/side_step_short_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 29.0,
                                                                                                     "timeScale": 1.0,
@@ -1162,7 +1600,7 @@
                                                                                                 "id": "strafeLeftStep_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/side_step_left.fbx",
+                                                                 				                    "url": "fbx/side_step_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 20.0,
                                                                                                     "timeScale": 1.0,
@@ -1174,7 +1612,7 @@
                                                                                                 "id": "strafeLeftWalk_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_left.fbx",
+                                                                				                    "url": "fbx/walk_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 35.0,
                                                                                                     "timeScale": 1.0,
@@ -1186,7 +1624,7 @@
                                                                                                 "id": "strafeLeftWalkFast_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_left_fast.fbx",
+                                                                 				                    "url": "fbx/walk_left_fast.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 21.0,
                                                                                                     "timeScale": 1.0,
@@ -1198,7 +1636,7 @@
                                                                                                 "id": "strafeLeftJog_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jog_left.fbx",
+                                                             					                    "url": "fbx/jog_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 24.0,
                                                                                                     "timeScale": 1.0,
@@ -1222,7 +1660,7 @@
                                                                                                 "id": "strafeRightShortStep_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/side_step_short_left.fbx",
+                                                                  					                "url": "fbx/side_step_short_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 29.0,
                                                                                                     "timeScale": 1.0,
@@ -1235,7 +1673,7 @@
                                                                                                 "id": "strafeRightStep_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/side_step_left.fbx",
+                                                                  					                "url": "fbx/side_step_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 20.0,
                                                                                                     "timeScale": 1.0,
@@ -1248,7 +1686,7 @@
                                                                                                 "id": "strafeRightWalk_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_left.fbx",
+                                                                 				                    "url": "fbx/walk_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 35.0,
                                                                                                     "timeScale": 1.0,
@@ -1261,7 +1699,7 @@
                                                                                                 "id": "strafeRightFast_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/walk_left_fast.fbx",
+                                                                   					                "url": "fbx/walk_left_fast.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 21.0,
                                                                                                     "timeScale": 1.0,
@@ -1274,7 +1712,7 @@
                                                                                                 "id": "strafeRightJog_c",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jog_left.fbx",
+                                                                 				                    "url": "fbx/jog_left.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 24.0,
                                                                                                     "timeScale": 1.0,
@@ -1390,9 +1828,9 @@
                                                                                         "id": "fly",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/fly.fbx",
+                                                                                            "url": "fbx/fly.fbx",
                                                                                             "startFrame": 1.0,
-                                                                                            "endFrame": 80.0,
+                                                                                            "endFrame": 79.0,
                                                                                             "timeScale": 1.0,
                                                                                             "loopFlag": true
                                                                                         },
@@ -1402,7 +1840,7 @@
                                                                                         "id": "takeoffStand",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/jump_standing_launch.fbx",
+                                                                                            "url": "fbx/jump_standing_launch.fbx",
                                                                                             "startFrame": 2.0,
                                                                                             "endFrame": 16.0,
                                                                                             "timeScale": 1.0,
@@ -1414,8 +1852,8 @@
                                                                                         "id": "TAKEOFFRUN",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/jump_running_launch_land.fbx",
-                                                                                            "startFrame": 4.0,
+                                                                                            "url": "fbx/jump_running_launch_land.fbx",
+                                                                                            "startFrame": 6.0,
                                                                                             "endFrame": 15.0,
                                                                                             "timeScale": 1.0,
                                                                                             "loopFlag": false
@@ -1434,7 +1872,7 @@
                                                                                                 "id": "inAirStandPreApex",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jump_standing_apex.fbx",
+                                                                                                    "url": "fbx/jump_standing_apex.fbx",
                                                                                                     "startFrame": 0.0,
                                                                                                     "endFrame": 0.0,
                                                                                                     "timeScale": 1.0,
@@ -1446,7 +1884,7 @@
                                                                                                 "id": "inAirStandApex",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jump_standing_apex.fbx",
+                                                                                                    "url": "fbx/jump_standing_apex.fbx",
                                                                                                     "startFrame": 1.0,
                                                                                                     "endFrame": 1.0,
                                                                                                     "timeScale": 1.0,
@@ -1458,7 +1896,7 @@
                                                                                                 "id": "inAirStandPostApex",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jump_standing_apex.fbx",
+                                                                                                    "url": "fbx/jump_standing_apex.fbx",
                                                                                                     "startFrame": 2.0,
                                                                                                     "endFrame": 2.0,
                                                                                                     "timeScale": 1.0,
@@ -1480,7 +1918,7 @@
                                                                                                 "id": "inAirRunPreApex",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jump_running_launch_land.fbx",
+                                                                                                    "url": "fbx/jump_running_launch_land.fbx",
                                                                                                     "startFrame": 16.0,
                                                                                                     "endFrame": 16.0,
                                                                                                     "timeScale": 1.0,
@@ -1492,7 +1930,7 @@
                                                                                                 "id": "inAirRunApex",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jump_running_launch_land.fbx",
+                                                                                                    "url": "fbx/jump_running_launch_land.fbx",
                                                                                                     "startFrame": 22.0,
                                                                                                     "endFrame": 22.0,
                                                                                                     "timeScale": 1.0,
@@ -1504,7 +1942,7 @@
                                                                                                 "id": "inAirRunPostApex",
                                                                                                 "type": "clip",
                                                                                                 "data": {
-                                                                                                    "url": "qrc:///avatar/animations/jump_running_launch_land.fbx",
+                                                                                                    "url": "fbx/jump_running_launch_land.fbx",
                                                                                                     "startFrame": 33.0,
                                                                                                     "endFrame": 33.0,
                                                                                                     "timeScale": 1.0,
@@ -1518,7 +1956,7 @@
                                                                                         "id": "landStandImpact",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/jump_standing_land_settle.fbx",
+                                                                                            "url": "fbx/jump_standing_land_settle.fbx",
                                                                                             "startFrame": 1.0,
                                                                                             "endFrame": 6.0,
                                                                                             "timeScale": 1.0,
@@ -1530,7 +1968,7 @@
                                                                                         "id": "landStand",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/jump_standing_land_settle.fbx",
+                                                                                            "url": "fbx/jump_standing_land_settle.fbx",
                                                                                             "startFrame": 6.0,
                                                                                             "endFrame": 68.0,
                                                                                             "timeScale": 1.0,
@@ -1542,8 +1980,8 @@
                                                                                         "id": "LANDRUN",
                                                                                         "type": "clip",
                                                                                         "data": {
-                                                                                            "url": "qrc:///avatar/animations/jump_running_launch_land.fbx",
-                                                                                            "startFrame": 29.0,
+                                                                                            "url": "fbx/jump_running_launch_land.fbx",
+                                                                                            "startFrame": 31.0,
                                                                                             "endFrame": 40.0,
                                                                                             "timeScale": 1.0,
                                                                                             "loopFlag": false
