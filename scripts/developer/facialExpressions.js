@@ -19,6 +19,8 @@
     // TODO: ADD HTML LANDING PAGE
 
     var TRANSITION_TIME_SECONDS = 0.13;
+    var TRANSITION_TIME_DEFAULT = 0.45;
+    var DEFAULT_TIMEOUT = 1.0;
 
     var tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     var icon = "https://hifi-content.s3.amazonaws.com/elisalj/emoji_scripts/icons/emoji-i.svg";
@@ -191,7 +193,7 @@
 
     var FLIRT = {
         "EyeDown_R": -0.0 ,
-        "MouthLeft": 0.1859 ,
+        "MouthLeft": 0.126 ,
         "LipsFunnel": 0.0 ,
         "LipsPucker": 0.0 ,
         "MouthRight": 0.0 ,
@@ -215,10 +217,10 @@
         "EyeIn_L": -0.0 ,
         "Puff": 0.0 ,
         "JawFwd": 0.0 ,
-        "EyeSquint_L": 0.53 ,
+        "EyeSquint_L": 0.0 ,
         "LipsLowerClose": -0.0 ,
-        "EyeBlink_L": 0.0 ,
-        "CheekSquint_L": 0.0 ,
+        "EyeBlink_L": 1.0 ,
+        "CheekSquint_L": 0.53 ,
         "EyeOut_R": -0.0 ,
         "BrowsD_R": 0.0 ,
         "JawLeft": 0.0 ,
@@ -227,10 +229,10 @@
         "LipsStretch_L": 0.0 ,
         "BrowsD_L": 0.0 ,
         "EyeOut_L": 0.0 ,
-        "CheekSquint_R": 0.0 ,
-        "EyeBlink_R": 0.0 ,
+        "CheekSquint_R": 0.5359 ,
+        "EyeBlink_R": 1.0 ,
         "MouthFrown_R": 0.0 ,
-        "EyeSquint_R": 0.53 ,
+        "EyeSquint_R": 0.0 ,
         };
 
     var SAD = {
@@ -426,41 +428,68 @@
 
     }
 
+    function clamp(val, min, max) {
+        return Math.min(Math.max(val, min), max);
+    }
+
     var lastEmotionUsed = DEFAULT;
     var emotion = DEFAULT;
     var isChangingEmotion = false;
     var changingEmotionPercentage = 0.0;
+    var timeOutTimer = 0.0;
+    var isDefaultEmotion = true;
 
     Script.update.connect(function(deltaTime) {
 
-    //CLEANUP if all HMD controls are off
-        // var allInputs = clamp(
-        // //grips
-        // Controller.getValue(Controller.Standard.LT) +
-        // Controller.getValue(Controller.Standard.LeftGrip)+
-        // Controller.getValue(Controller.Standard.LT)+
-        // Controller.getValue(Controller.Standard.LT)+
-        // //finger/thumb touches
-        // Controller.getValue(Controller.Standard.LeftIndexPoint)+
-        // Controller.getValue(Controller.Standard.RightIndexPoint)+
-        // Controller.getValue(Controller.Standard.LeftThumbUp)+
-        // Controller.getValue(Controller.Standard.RightThumbUp)
-        // , 0, 1);
+        // CLEANUP:  revert to DEFAULT if all HMD controls are off for a full second.
+        var allInputs = clamp(
+        //grips
+        Controller.getValue(Controller.Standard.RightGrip) +
+        Controller.getValue(Controller.Standard.LeftGrip)+
+        //finger/thumb touches
+        Controller.getValue(Controller.Standard.LSTouch)+
+        Controller.getValue(Controller.Standard.RSTouch)+
+        Controller.getValue(Controller.Standard.LTClick)+
+        Controller.getValue(Controller.Standard.RTClick)
+        , 0, 1);
 
-
+        //if no inputs, and timer reaches DEFAULT_TIMEOUT, trigger DEFAULT emotion
+        if (allInputs === 0 && !isDefaultEmotion){
+            timeOutTimer += deltaTime;
+            if(timeOutTimer >= DEFAULT_TIMEOUT)
+            {
+                setEmotion(DEFAULT);
+                isDefaultEmotion = true;
+                timeOutTimer = 0.0;
+            }
+        }
+        else
+        {
+            timeOutTimer = 0;
+        }
 
 
         if (!isChangingEmotion) {
             return;
         }
 
-        changingEmotionPercentage += deltaTime / TRANSITION_TIME_SECONDS;
+        if(emotion === DEFAULT)
+        {
+            changingEmotionPercentage += deltaTime / TRANSITION_TIME_DEFAULT;
+        }
+        else
+        {
+            changingEmotionPercentage += deltaTime / TRANSITION_TIME_SECONDS;
+        }
+
 
         if (changingEmotionPercentage >= 1.0) {
             changingEmotionPercentage = 1.0;
             isChangingEmotion = false;
             if (emotion === DEFAULT) {
                 MyAvatar.hasScriptedBlendshapes = false;
+                MyAvatar.hasProceduralBlinkFaceMovement = true;
+                isDefaultEmotion = true;
             }
         }
 
@@ -474,9 +503,7 @@
                 mixValueSum);
         }
 
-        // if (allInputs === 0){
-        //     setEmotion(DEFAULT);
-        // }
+
 
     });
 
@@ -489,6 +516,10 @@
             emotion = currentEmotion;
             isChangingEmotion = true;
             MyAvatar.hasScriptedBlendshapes = true;
+            MyAvatar.hasProceduralBlinkFaceMovement = false;
+            if (emotion != DEFAULT) {
+                isDefaultEmotion = false;
+            }
         }
     }
 
@@ -545,18 +576,35 @@
     });
 
 
+    var leftGripDoOnce = true;
+    var rightGripDoOnce = true;
 
     //CONTROLLER MAPS
     controllerMapping.from(Controller.Standard.LeftGrip).to(function(value) {
         if (value !== 0) {
-            setEmotion(DISGUST);
-            // console.log("DISGUST ON");
+            if(leftGripDoOnce)
+            {
+                setEmotion(DISGUST);
+                leftGripDoOnce = false;
+            }
+        }
+        else
+        {
+            leftGripDoOnce = true;
         }
     });
 
     controllerMapping.from(Controller.Standard.RightGrip).to(function(value) {
         if (value !== 0) {
-            setEmotion(LAUGH);
+            if(rightGripDoOnce)
+            {
+                setEmotion(LAUGH);
+                rightGripDoOnce = false;
+            }
+        }
+        else
+        {
+            rightGripDoOnce = true;
         }
     });
 
